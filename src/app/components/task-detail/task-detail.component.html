@@ -1,17 +1,28 @@
-<div class="container">
-    <div *ngIf="task; else loading" class="bg-white rounded-lg shadow-md p-6">
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div *ngIf="task; else loading" class="bg-white rounded-xl shadow-lg p-8 w-full max-w-lg">
         <div *ngIf="!editing">
-          <h1 class="text-2xl font-bold mb-4">{{ task.title }}</h1>
-          <p class="text-gray-600 mb-4">{{ task.description || 'No description provided.' }}</p>
-          <p>Status: <span [class.text-success]="task.completed" [class.text-secondary]="!task.completed">{{ task.completed ? 'Completed' : 'Incomplete' }}</span></p>
-            <button (click)="toggleEdit()" class="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-blue-700 transition">Edit</button>
-            <button (click)="router.navigate(['/'])" class="mt-4 ml-3 px-4 py-2 bg-secondary text-white rounded hover:bg-blue-700 transition">
-              Back to List
-          </button>
+            <h1 class="text-3xl font-extrabold mb-6 text-center">{{ task.title }}</h1>
+            <p class="text-gray-600 mb-6 text-center">
+                {{ task.description || 'No description provided.' }}
+            </p>
+            <p class="text-center mb-6">
+                Status:
+                <span [class.text-green-500]="task.completed" [class.text-gray-500]="!task.completed">
+                    {{ task.completed ? 'Completed' : 'Incomplete' }}
+                </span>
+            </p>
+            <div class="flex justify-around">
+                <button (click)="toggleEdit()" class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                    Edit
+                </button>
+                <button (click)="router.navigate(['/'])" class="px-6 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">
+                    Back to List
+                </button>
+            </div>
         </div>
-      <app-task-form *ngIf="editing" [taskToEdit]="task" (taskUpdated)="onTaskUpdated()"></app-task-form>
+        <app-task-form *ngIf="editing" [taskToEdit]="task" (taskUpdated)="onTaskUpdated()"></app-task-form>
     </div>
     <ng-template #loading>
-      <p class="text-center">Loading task details...</p>
+        <p class="text-center">Loading task details...</p>
     </ng-template>
-  </div>
+</div>

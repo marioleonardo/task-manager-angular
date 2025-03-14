@@ -3,14 +3,13 @@ import { Task } from '../../models/task.model';
 
 @Component({
   standalone: false,
-
   selector: 'app-task-item',
   templateUrl: './task-item.component.html',
   styleUrls: ['./task-item.component.scss']
 })
 export class TaskItemComponent {
-  @Input()
-  task!: Task;
+  @Input() task!: Task;
+
   @Output() deleteTask = new EventEmitter<string>();
   @Output() toggleCompleted = new EventEmitter<string>();
 
@@ -19,6 +18,6 @@ export class TaskItemComponent {
   }
 
   onCheckboxChange(): void {
-    this.toggleCompleted.emit(this.task.id)
+    this.toggleCompleted.emit(this.task.id);
   }
 }
