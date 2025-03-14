@@ -1,0 +1,13 @@
+<div class="bg-white rounded-lg shadow-md p-4 transition-shadow hover:shadow-lg">
+    <div class="flex items-center justify-between mb-2">
+      <h2 class="text-xl font-semibold truncate" [class.line-through]="task.completed">{{ task.title }}</h2>
+      <input type="checkbox" [checked]="task.completed" (change)="onCheckboxChange()" class="form-checkbox h-5 w-5 text-primary" />
+    </div>
+      <p class="text-gray-600 mb-4 truncate" *ngIf="task.description">{{ task.description }}</p>
+    <div class="flex justify-end space-x-2">
+       <a [routerLink]="['/task', task.id]" class="px-3 py-1 bg-primary text-light-text rounded hover:bg-blue-700 transition-colors">
+        Edit
+      </a>
+      <button (click)="onDeleteClick()" class="px-3 py-1 bg-danger text-light-text rounded hover:bg-red-700 transition-colors">Delete</button>
+    </div>
+  </div>

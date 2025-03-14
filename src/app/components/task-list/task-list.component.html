@@ -1,0 +1,41 @@
+<div class="min-h-screen flex flex-col items-center justify-start p-4">
+    <div class="w-full max-w-4xl">
+        <h1 class="text-3xl font-bold mb-6 text-center">Task List</h1>
+
+        <!-- Filter Buttons -->
+        <div class="mb-4 flex justify-center">
+            <button
+              (click)="filter = 'all'"
+              [class.bg-primary]="filter === 'all'"
+              [class.text-light-text]="filter === 'all'"
+              class="px-4 py-2 rounded mr-2 hover:bg-primary hover:text-light-text transition-colors">
+              All
+            </button>
+            <button
+              (click)="filter = 'completed'"
+              [class.bg-success]="filter === 'completed'"
+              [class.text-light-text]="filter === 'completed'"
+              class="px-4 py-2 rounded mr-2 hover:bg-success hover:text-light-text transition-colors">
+              Completed
+            </button>
+            <button
+              (click)="filter = 'incomplete'"
+              [class.bg-secondary]="filter === 'incomplete'"
+              [class.text-light-text]="filter === 'incomplete'"
+              class="px-4 py-2 rounded hover:bg-secondary hover:text-light-text transition-colors">
+              Incomplete
+            </button>
+        </div>
+
+        <app-task-form (taskAdded)="taskService.getTasks()"></app-task-form>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+            <app-task-item
+                *ngFor="let task of filteredTasks; trackBy: trackByFn"
+                [task]="task"
+                (deleteTask)="onDeleteTask($event)"
+                (toggleCompleted)="onToggleCompleted($event)"
+            ></app-task-item>
+        </div>
+    </div>
+</div>
